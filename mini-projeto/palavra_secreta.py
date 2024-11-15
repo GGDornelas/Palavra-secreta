@@ -1,5 +1,6 @@
 import random
 import os
+import time
 
 class Faculdade:
     def __init__(self, nivel):
@@ -9,6 +10,7 @@ class Faculdade:
         self.letras_acertadas = ''
         self.letra_digitada = ''
         self.contagem = 0
+
         if self.nivel == 1:
             self.palavras_secretas += 'aula', 'aluno', 'professor', 'prova'
         elif self.nivel == 2:
@@ -29,6 +31,8 @@ class Faculdade:
 
     def jogar(self):
         print(f'Nível escolhido = {self.nivel}')
+
+        tempo_inicio = time.time()
 
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
@@ -58,6 +62,12 @@ class Faculdade:
                         self.letras_acertadas += letra
                         break
 
+            if self.contagem == 40:
+                for letra in self.palavra_secreta:
+                    if letra not in self.letras_acertadas:
+                        self.letras_acertadas += letra
+                        break
+
             self.palavra_formada = ''
             for self.letra_secreta in self.palavra_secreta:
                 if self.letra_secreta in self.letras_acertadas:
@@ -71,16 +81,22 @@ class Faculdade:
                 print('Já se foram 15 tentativas, vou te ajudar!!') 
             if self.contagem == 25:
                 print('Burro??? Já se foram 25 tentativas, vou te dar mais uma letra.') 
-
+            if self.contagem == 40:
+                print('40 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
 
             print(f'Palavra formada: {self.palavra_formada}')
         
 
             if self.palavra_formada == self.palavra_secreta:
                 os.system('clear')
+                
+                tempo_final = time.time()
+                tempo_gasto = tempo_final - tempo_inicio
+
                 print('Parabéns, você ganhou!')
                 print(f'A palavra era "{self.palavra_secreta}"')
                 print(f'{self.contagem} tentativas')
+                print(f'Tempo gasto: {tempo_gasto:.2f} segundos')
                 break
         
 
