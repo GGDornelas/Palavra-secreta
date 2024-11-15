@@ -10,6 +10,8 @@ class Faculdade:
         self.letras_acertadas = ''
         self.letra_digitada = ''
         self.contagem = 0
+        self.contagem2 = 0
+        self.dicas = 0
 
         if self.nivel == 1:
             self.palavras_secretas += 'aula', 'aluno', 'professor', 'prova'
@@ -29,7 +31,7 @@ class Faculdade:
             'Olá, bem-vindo ao jogo PALAVRA SECRETA, o objetivo desse jogo é você conseguir acertar qual a palavra que está\nescondida na menor quantidade de tentativas possiveis'
             )
 
-    def jogar(self):
+    def jogar_solo(self):
         print(f'Nível escolhido = {self.nivel}')
 
         tempo_inicio = time.time()
@@ -38,7 +40,7 @@ class Faculdade:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
 
-            if len(self.letra_digitada) > 1:
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
                 print('Digite apenas uma letra')
                 continue
             
@@ -78,10 +80,13 @@ class Faculdade:
     
             os.system('clear')
             if self.contagem == 15:
+                self.dicas += 1
                 print('Já se foram 15 tentativas, vou te ajudar!!') 
             if self.contagem == 25:
+                self.dicas += 1
                 print('Burro??? Já se foram 25 tentativas, vou te dar mais uma letra.') 
             if self.contagem == 40:
+                self.dicas += 1
                 print('40 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
 
             print(f'Palavra formada: {self.palavra_formada}')
@@ -96,10 +101,14 @@ class Faculdade:
                 print('Parabéns, você ganhou!')
                 print(f'A palavra era "{self.palavra_secreta}"')
                 print(f'{self.contagem} tentativas')
+                print(f'Dicas usadas: {self.dicas}')
                 print(f'Tempo gasto: {tempo_gasto:.2f} segundos')
                 break
+    
+    def jogar_multiplayer(self):
+        player_1 = input('Digite o nome do jogador 1: ')
+        player_2 = input('Digite o nome do jogador 2: ')   
         
-
 
 class Ingles(Faculdade):
     def __init__(self, nivel):
@@ -149,8 +158,8 @@ class Ingles(Faculdade):
         super().objetivo()
         print('Tema = INGLÊS')
 
-    def jogar(self):
-        super().jogar()  
+    def jogar_solo(self):
+        super().jogar_solo()  
         print(f'Tradução: {self.traducao()}')
     
 
@@ -175,8 +184,8 @@ class Paises(Faculdade):
         super().objetivo()
         print('Tema = PAISES')
 
-    def jogar(self):
-        super().jogar()  
+    def jogar_solo(self):
+        super().jogar_solo()  
         
 def selecionar_tema():
     print(
@@ -216,20 +225,22 @@ def selecionar_nivel():
         except ValueError:
             print("Por favor, insira um número válido.")
 
+
 tema_jogo = selecionar_tema()
 nivel_jogo = selecionar_nivel()
 
 if tema_jogo == 1:
     jogo = Faculdade(nivel_jogo)
-    jogo.jogar()
+    jogo.jogar_solo()
 elif tema_jogo == 2:
     jogo = Ingles(nivel_jogo)
-    jogo.jogar()
+    jogo.jogar_solo()
 elif tema_jogo == 3:
     jogo = Paises(nivel_jogo)
-    jogo.jogar()
+    jogo.jogar_solo()
 else:
     print("Não era pra chegar aqui")
     exit()
 
 
+# ACRESCENTAR O MULTIJOGADOR
