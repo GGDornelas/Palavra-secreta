@@ -1,0 +1,6 @@
+COLEÇÕES DE DADOS EM PYTHON - nível 1
+
+Qual é a diferença de listas e tuplas? 
+    - listas são mutáveis e tuplas são imutáveis
+
+            

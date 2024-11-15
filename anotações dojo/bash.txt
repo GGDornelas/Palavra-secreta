@@ -1,0 +1,49 @@
+BASH - nível 1
+
+dpkg = é utilizado na instalação, na remoção e no gerenciamento de pacotes específicos, \n
+é útil para instalar pacotes que você já baixou e que não estão nos repositórios padrões do sistema.
+
+chmod = usado para definir quem pode ler, escrever ou executar um arquivo ou pasta
+
+cat = Server para abrir um arquivo no terminal
+
+mkdir = Criar uma pasta/diretório
+
+touch = criar um arquivo vázio
+
+ls = Serve para listar arquivos do seu diretório
+
+cut = Pode ser usado para manipular e extrair dados no terminal
+
+find = Procurar um arquivo ou diretório pelo terminal
+
+scp = é usado para copiar arquivos e diretórios entre sistemas locais e remotos 
+
+head = é usado para exibir as primeiras linhas de um arquivo de texto
+
+echo = serve para imprimir coisas no terminal, tipo um 'print' para o bash, da pra imprimir mensagens simples ou até uma variável por exemplo
+
+clear = Serve para limpar o terminal
+
+tail = Serve para exibir as ultimas linhas de um arquivo de texto
+
+ps = Serve para verificar quais processos estão em execução no sistema
+
+rm = Serve para remover arquivos e diretórios
+
+curl = Serve para fazer requisições a URL's e transferir dados
+
+sort = É usado para manipular e organizar dados em arquivos de texto
+
+vim = É um editor de texto avançado, usado para criar e editar arquivos pelo terminal
+
+sh = É usado para executar scripts de shell
+
+alias = É usado para criar atalhos personalizados para comandos
+
+cd = Serve para mudar de diretório
+
+unzip = Serve para descompactar um arquivo .zip
+
+cp = É usado para copiar arquivos e diretórios
+
