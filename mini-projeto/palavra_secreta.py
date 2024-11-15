@@ -46,8 +46,17 @@ class Faculdade:
             if self.letra_digitada in self.palavra_secreta:
                 self.letras_acertadas += self.letra_digitada
 
-            if self.contagem == 10:
-                self.letras_acertadas += self.palavra_secreta[0]  # CORRIGIR O FATO DE SE JA TIVER A PRIMEIRA LETRA E DUAS IGUAIS 
+            if self.contagem == 15:
+                for letra in self.palavra_secreta:
+                    if letra not in self.letras_acertadas:
+                        self.letras_acertadas += letra
+                        break
+
+            if self.contagem == 25:
+                for letra in self.palavra_secreta:
+                    if letra not in self.letras_acertadas:
+                        self.letras_acertadas += letra
+                        break
 
             self.palavra_formada = ''
             for self.letra_secreta in self.palavra_secreta:
@@ -58,8 +67,12 @@ class Faculdade:
                 
     
             os.system('clear')
-            if self.contagem == 10:
-                print('Já foram 10 tentativas, toma a primeira letra') 
+            if self.contagem == 15:
+                print('Já se foram 15 tentativas, vou te ajudar!!') 
+            if self.contagem == 25:
+                print('Burro??? Já se foram 25 tentativas, vou te dar mais uma letra.') 
+
+
             print(f'Palavra formada: {self.palavra_formada}')
         
 
@@ -83,7 +96,7 @@ class Ingles(Faculdade):
         elif self.nivel == 3:
             self.palavras_secretas += 'weird', 'outside', 'church', 'health', 'noise'
         elif self.nivel == 4:
-            self.palavras_secretas += 'throw', 'through', 'abroad', 
+            self.palavras_secretas += 'throw', 'through', 'abroad', 'knowledge', 'environmental'
         else:
             print('digite um nível válido')
         self.palavra_secreta = random.choice(self.palavras_secretas)
@@ -92,6 +105,10 @@ class Ingles(Faculdade):
         traducoes = {
             'hello': 'Olá',
             'thank you': 'Obrigado',
+            'nice': 'Legal',
+            'good': 'Bom',
+            'bad': 'Ruim',
+            'easy': 'Fácil',
             'table': 'Mesa',
             'wood': 'Madeira',
             'maybe': 'Talvez',
@@ -100,12 +117,15 @@ class Ingles(Faculdade):
             'notebook': 'Caderno',
             'backpack': 'Mochila',
             'weird': 'Estranho',
-            'outside': 'Lá fora',
+            'outside': 'Fora',
             'church': 'Igreja',
             'health': 'Saúde',
-            'throw': 'Lançar',
+            'noise': 'Barulho',
+            'throw': 'Arremessar',
             'through': 'Através',
             'abroad': 'Exterior',
+            'knowledge': 'Conhecimento',
+            'environmental': 'Ambiental',
         }
         return traducoes.get(self.palavra_secreta, 'Não tem tradução')
     
@@ -142,10 +162,28 @@ class Paises(Faculdade):
     def jogar(self):
         super().jogar()  
         
+def selecionar_tema():
+    print(
+            'Olá, bem-vindo ao jogo PALAVRA SECRETA, o objetivo desse jogo é você conseguir acertar qual a palavra que está\nescondida na menor quantidade de tentativas possiveis'
+            )
+    print("Escolha o tema do jogo:")
+    print("1 - Faculdade")
+    print("2 - Inglês")
+    print("3 - Países")
 
+    while True:
+        try:
+            tema = int(input("Escolha o tema: "))
+            if tema in [1, 2, 3]:
+                os.system('clear')
+                return tema
+            else:
+                print("Tema inválido. Escolha entre 1 e 4.")
+        except ValueError:
+            print("Por favor, insira um número válido.")
 
 def selecionar_nivel():
-    print("Escolha o nível de dificuldade:")
+    print("Escolha o nível de dificuldade")
     print("1 - Fácil")
     print("2 - Médio")
     print("3 - Difícil")
@@ -153,7 +191,7 @@ def selecionar_nivel():
 
     while True:
         try:
-            nivel = int(input("Digite o número do nível desejado: "))
+            nivel = int(input("Escolha o tema: "))
             if nivel in [1, 2, 3, 4]:
                 os.system('clear')
                 return nivel
@@ -162,23 +200,20 @@ def selecionar_nivel():
         except ValueError:
             print("Por favor, insira um número válido.")
 
-nivel = selecionar_nivel()
+tema_jogo = selecionar_tema()
+nivel_jogo = selecionar_nivel()
 
+if tema_jogo == 1:
+    jogo = Faculdade(nivel_jogo)
+    jogo.jogar()
+elif tema_jogo == 2:
+    jogo = Ingles(nivel_jogo)
+    jogo.jogar()
+elif tema_jogo == 3:
+    jogo = Paises(nivel_jogo)
+    jogo.jogar()
+else:
+    print("Não era pra chegar aqui")
+    exit()
 
-
-
-
-
-
-faculdade = Faculdade(nivel)
-# faculdade.objetivo()
-# faculdade.jogar()    
-
-ingles = Ingles(nivel)
-# ingles.objetivo()
-# ingles.jogar()
-
-paises = Paises(nivel)
-paises.objetivo()
-paises.jogar()
 
