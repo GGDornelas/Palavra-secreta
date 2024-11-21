@@ -37,6 +37,7 @@ class Faculdade:
         print(f'Nível escolhido = {self.nivel}')
 
         tempo_inicio = time.time()
+        inicio = time.time()
 
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
@@ -90,7 +91,14 @@ class Faculdade:
             if self.contagem == 30:
                 self.dicas += 1
                 print('30 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
-
+                                         
+            tempo_decorrido = time.time() - inicio  
+            minutos = int(tempo_decorrido // 60)
+            segundos = int(tempo_decorrido % 60)
+            milissegundos = int((tempo_decorrido * 100) % 100)
+            
+            print(f'\rTempo: {minutos:02}:{segundos:02}.{milissegundos:02}\n', end='', flush=True)
+            time.sleep(0.01)
             print(f'Palavra formada: {self.palavra_formada}')
         
 
@@ -230,7 +238,7 @@ class Faculdade:
         else:
             print('DEU EMPATE!')
 
-            
+
 
 class Ingles(Faculdade):
     def __init__(self, nivel):
@@ -402,5 +410,3 @@ else:
     print("Não era pra chegar aqui")
     exit()
 
-
-# ACRESCENTAR O MULTIJOGADOR
