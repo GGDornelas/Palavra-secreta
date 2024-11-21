@@ -8,7 +8,9 @@ class Faculdade:
         self.palavras_secretas = []
         self.palavra_secreta = ''
         self.letras_acertadas = ''
+        self.letras_acertadas_2 = ''
         self.letra_digitada = ''
+        self.letra_digitada_2 = ''
         self.contagem = 0
         self.contagem2 = 0
         self.dicas = 0
@@ -52,19 +54,19 @@ class Faculdade:
             if self.letra_digitada in self.palavra_secreta:
                 self.letras_acertadas += self.letra_digitada
 
-            if self.contagem == 15:
+            if self.contagem == 10:
                 for letra in self.palavra_secreta:
                     if letra not in self.letras_acertadas:
                         self.letras_acertadas += letra
                         break
 
-            if self.contagem == 25:
+            if self.contagem == 20:
                 for letra in self.palavra_secreta:
                     if letra not in self.letras_acertadas:
                         self.letras_acertadas += letra
                         break
 
-            if self.contagem == 40:
+            if self.contagem == 30:
                 for letra in self.palavra_secreta:
                     if letra not in self.letras_acertadas:
                         self.letras_acertadas += letra
@@ -79,36 +81,156 @@ class Faculdade:
                 
     
             os.system('clear')
-            if self.contagem == 15:
+            if self.contagem == 10:
                 self.dicas += 1
-                print('Já se foram 15 tentativas, vou te ajudar!!') 
-            if self.contagem == 25:
+                print('Já se foram 10 tentativas, vou te ajudar!!') 
+            if self.contagem == 20:
                 self.dicas += 1
-                print('Burro??? Já se foram 25 tentativas, vou te dar mais uma letra.') 
-            if self.contagem == 40:
+                print('Burro??? Já se foram 20 tentativas, vou te dar mais uma letra.') 
+            if self.contagem == 30:
                 self.dicas += 1
-                print('40 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
+                print('30 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
 
             print(f'Palavra formada: {self.palavra_formada}')
         
 
             if self.palavra_formada == self.palavra_secreta:
                 os.system('clear')
-                
                 tempo_final = time.time()
                 tempo_gasto = tempo_final - tempo_inicio
+                minutos = tempo_gasto // 60
+                segundos = tempo_gasto % 60
 
                 print('Parabéns, você ganhou!')
                 print(f'A palavra era "{self.palavra_secreta}"')
                 print(f'{self.contagem} tentativas')
                 print(f'Dicas usadas: {self.dicas}')
-                print(f'Tempo gasto: {tempo_gasto:.2f} segundos')
+                if minutos == 0:
+                    print(f'Tempo gasto: {segundos:.2f} segundos')
+                else:
+                    print(f'Tempo gasto: {minutos:.0f} minutos e {segundos:.2f} segundos')
                 break
     
     def jogar_multiplayer(self):
-        player_1 = input('Digite o nome do jogador 1: ')
-        player_2 = input('Digite o nome do jogador 2: ')   
+        self.player_1 = input('Digite o nome do jogador 1: ')
+        self.player_2 = input('Digite o nome do jogador 2: ')   
+
+        print(f'Vez do {self.player_1}')
+        print(f'Nível escolhido = {self.nivel}')
+
+        tempo_inicio_1 = time.time()
+        self.minutos_1 = 0
+        self.segundos_1 = 0
+
+        while True:
+            self.letra_digitada = input('Digite uma letra: ').lower()
+            
+
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
+                print('Digite apenas uma letra')
+                continue
+            
+            self.contagem += 1
+
+            if ' ' in self.palavra_secreta:
+                self.letras_acertadas += ' '
+
+            self.palavra_secreta_2 = self.palavra_secreta
+
+            if self.letra_digitada in self.palavra_secreta:
+                self.letras_acertadas += self.letra_digitada
+
+
+            self.palavra_formada = ''
+            for self.letra_secreta in self.palavra_secreta:
+                if self.letra_secreta in self.letras_acertadas:
+                    self.palavra_formada += self.letra_secreta
+                else:
+                    self.palavra_formada += '*'
+
+            os.system('clear')
+            print(f'Palavra formada: {self.palavra_formada}')
+
+            if self.palavra_formada == self.palavra_secreta:
+                os.system('clear')
+                tempo_final_1 = time.time()
+                self.tempo_gasto_1 = tempo_final_1 - tempo_inicio_1
+                self.minutos_1 = self.tempo_gasto_1 // 60
+                self.segundos_1 = self.tempo_gasto_1 % 60
+                print('Parabéns, você acertou!')
+                break
         
+        print('-------------------------------------')
+        print(f'Vez do {self.player_2}')
+        print(f'Nível escolhido = {self.nivel}')
+
+        tempo_inicio_2 = time.time()
+        self.minutos_2 = 0
+        self.segundos_2 = 0
+
+
+        while True:
+            self.letra_digitada_2 = input('Digite uma letra: ').lower()
+            
+
+            if len(self.letra_digitada_2) > 1 or len(self.letra_digitada_2) == 0:
+                print('Digite apenas uma letra')
+                continue
+            
+            self.contagem2 += 1
+
+            if ' ' in self.palavra_secreta_2:
+                self.letras_acertadas_2 += ' '
+
+            if self.letra_digitada_2 in self.palavra_secreta_2:
+                self.letras_acertadas_2 += self.letra_digitada_2
+
+            self.palavra_formada_2 = ''
+            for self.letra_secreta_2 in self.palavra_secreta_2:
+                if self.letra_secreta_2 in self.letras_acertadas_2:
+                    self.palavra_formada_2 += self.letra_secreta_2
+                else:
+                    self.palavra_formada_2 += '*'
+
+            os.system('clear')
+            print(f'Palavra formada: {self.palavra_formada_2}')
+
+            if self.palavra_formada_2 == self.palavra_secreta_2:
+                os.system('clear')
+                tempo_final_2 = time.time()
+                self.tempo_gasto_2 = tempo_final_2 - tempo_inicio_2
+                self.minutos_2 = self.tempo_gasto_2 // 60
+                self.segundos_2 = self.tempo_gasto_2 % 60
+                print('Parabéns, você acertou!')
+                break
+            
+        print('-------------------------`')
+        print('RESULTADOS FINAIS')
+        if self.minutos_1 == 0:
+            print(f'{self.player_1} usou {self.contagem} tentativas e levou {self.segundos_1:.2f} segundos')
+        else:
+            print(f'{self.player_1} usou {self.contagem} tentativas e levou {self.minutos_1:.0f} minutos e {self.segundos_1:.2f} segundos')
+        if self.minutos_2 == 0:
+            print(f'{self.player_2} usou {self.contagem2} tentativas e levou {self.segundos_2:.2f} segundos')
+        else:
+            print(f'{self.player_2} usou {self.contagem2} tentativas e levou {self.minutos_2:.0f} minutos e {self.segundos_2:.2f} segundos')
+        print('----------------------------------')
+        print('PORTANTO...')
+        if self.contagem > self.contagem2:
+            print(f'{self.player_2} GANHOU A PARTIDA!!')
+        elif self.contagem2 > self.contagem:
+            print(f'{self.player_1} GANHOU A PARTIDA!!')
+        elif self.contagem == self.contagem2:
+            if self.tempo_gasto_1 > self.tempo_gasto_2:
+                print(f'{self.player_2} GANHOU A PARTIDA!!')
+            elif self.tempo_gasto_2 > self.tempo_gasto_1:
+                print(f'{self.player_1} GANHOU A PARTIDA!!')
+            else:
+                print('DEu EMPATE!')
+        else:
+            print('DEU EMPATE!')
+
+            
 
 class Ingles(Faculdade):
     def __init__(self, nivel):
@@ -161,6 +283,9 @@ class Ingles(Faculdade):
     def jogar_solo(self):
         super().jogar_solo()  
         print(f'Tradução: {self.traducao()}')
+
+    def jogar_multiplayer(self):
+        super().jogar_multiplayer()
     
 
 class Paises(Faculdade):
@@ -186,6 +311,9 @@ class Paises(Faculdade):
 
     def jogar_solo(self):
         super().jogar_solo()  
+
+    def jogar_multiplayer(self):
+        super().jogar_multiplayer()
         
 def selecionar_tema():
     print(
@@ -216,7 +344,7 @@ def selecionar_nivel():
 
     while True:
         try:
-            nivel = int(input("Escolha o tema: "))
+            nivel = int(input("Escolha o nível: "))
             if nivel in [1, 2, 3, 4]:
                 os.system('clear')
                 return nivel
@@ -225,19 +353,51 @@ def selecionar_nivel():
         except ValueError:
             print("Por favor, insira um número válido.")
 
+def selecionar_modo_de_jogo():
+    print("Selecione o modo de jogo")
+    print("1 - Solo")
+    print("2 - Multijogador")
 
+    while True:
+        try:
+            modo = int(input("Escolha o nível: "))
+            if modo in [1, 2]:
+                os.system('clear')
+                return modo
+            else:
+                print("Nível inválido, Escolha entre 1 ou 2")
+        except ValueError:
+            print("Por favor, insira um número válido")
+
+
+modo_de_jogo = selecionar_modo_de_jogo()
 tema_jogo = selecionar_tema()
 nivel_jogo = selecionar_nivel()
 
 if tema_jogo == 1:
     jogo = Faculdade(nivel_jogo)
-    jogo.jogar_solo()
+    if modo_de_jogo == 1:
+        jogo.jogar_solo()
+    elif modo_de_jogo == 2:
+        jogo.jogar_multiplayer()
+    else:
+        print('Deu ruim')
 elif tema_jogo == 2:
     jogo = Ingles(nivel_jogo)
-    jogo.jogar_solo()
+    if modo_de_jogo == 1:
+        jogo.jogar_solo()
+    elif modo_de_jogo == 2:
+        jogo.jogar_multiplayer()
+    else:
+        print('Deu ruim')
 elif tema_jogo == 3:
     jogo = Paises(nivel_jogo)
-    jogo.jogar_solo()
+    if modo_de_jogo == 1:
+        jogo.jogar_solo()
+    elif modo_de_jogo == 2:
+        jogo.jogar_multiplayer()
+    else:
+        print('Deu ruim')
 else:
     print("Não era pra chegar aqui")
     exit()
