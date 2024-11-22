@@ -47,3 +47,14 @@ unzip = Serve para descompactar um arquivo .zip
 
 cp = É usado para copiar arquivos e diretórios
 
+sudo = Permite executar comandos com privilégios de superusuário, necessário para realizar tarefas que exigem permissões administrativas
+
+pwd = serve para exibir o caminho completo do diretório atual no qual você está trabalhando no terminal.
+
+mv = é utilizado para mover ou renomear arquivos e diretórios no sistema.
+
+wget = é utilizado para baixar arquivos da internet diretamente pelo terminal.
+
+grep = é utilizado para procurar por padrões em arquivos ou entradas de texto. Ele é especialmente útil para encontrar palavras, frases ou expressões regulares em grandes volumes de dados.
+
+bash = Ele é especialmente útil para executar scripts, testar comandos ou criar sessões isoladas no terminal. 

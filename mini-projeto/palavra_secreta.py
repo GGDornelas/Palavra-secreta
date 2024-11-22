@@ -37,7 +37,6 @@ class Faculdade:
         print(f'Nível escolhido = {self.nivel}')
 
         tempo_inicio = time.time()
-        inicio = time.time()
 
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
@@ -92,7 +91,7 @@ class Faculdade:
                 self.dicas += 1
                 print('30 tentativas, sério? Nunca mais joga isso, vou te dar a ultima letra.')
                                          
-            tempo_decorrido = time.time() - inicio  
+            tempo_decorrido = time.time() - tempo_inicio
             minutos = int(tempo_decorrido // 60)
             segundos = int(tempo_decorrido % 60)
             milissegundos = int((tempo_decorrido * 100) % 100)
@@ -104,11 +103,7 @@ class Faculdade:
 
             if self.palavra_formada == self.palavra_secreta:
                 os.system('clear')
-                tempo_final = time.time()
-                tempo_gasto = tempo_final - tempo_inicio
-                minutos = tempo_gasto // 60
-                segundos = tempo_gasto % 60
-
+                
                 print('Parabéns, você ganhou!')
                 print(f'A palavra era "{self.palavra_secreta}"')
                 print(f'{self.contagem} tentativas')
@@ -238,7 +233,17 @@ class Faculdade:
         else:
             print('DEU EMPATE!')
 
+    def contratempo(self):
 
+        tempo_inicio = time.time()
+
+        while True:
+            self.letra_digitada = input('Digite uma letra: ').lower()
+
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
+                print('Digite apenas uma letra')
+                continue
+            
 
 class Ingles(Faculdade):
     def __init__(self, nivel):
@@ -410,3 +415,5 @@ else:
     print("Não era pra chegar aqui")
     exit()
 
+# CONTRATEMPO JOGO
+# LIBERAR O JOGADOR A ESCREVER A PALAVRA SE ELE SOUBER
