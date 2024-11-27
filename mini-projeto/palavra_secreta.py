@@ -37,12 +37,12 @@ class Faculdade:
         print(f'Nível escolhido = {self.nivel}')
 
         tempo_inicio = time.time()
-
+        
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
 
-            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
             
@@ -129,7 +129,7 @@ class Faculdade:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
 
-            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
             
@@ -176,7 +176,7 @@ class Faculdade:
             self.letra_digitada_2 = input('Digite uma letra: ').lower()
             
 
-            if len(self.letra_digitada_2) > 1 or len(self.letra_digitada_2) == 0:
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
             
@@ -240,7 +240,7 @@ class Faculdade:
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
 
-            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0:
+            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
             
@@ -312,7 +312,7 @@ class Paises(Faculdade):
         elif self.nivel == 3:
             self.palavras_secretas += 'singapura', 'irlanda do norte', 'argelia', 'tailandia', 'albania', 'marrocos', 'angola', 'nova zelandia', 'afeganistao'
         elif self.nivel == 4:
-            self.palavras_secretas += 'chipre', 'alaska', 'etiopia', 'burkina faso', 'azerbaijao'
+            self.palavras_secretas += 'chipre', 'etiopia', 'burkina faso', 'azerbaijao'
         else:
             print('digite um nível válido')
         self.palavra_secreta = random.choice(self.palavras_secretas)
