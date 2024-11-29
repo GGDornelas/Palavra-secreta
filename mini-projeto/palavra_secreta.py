@@ -35,16 +35,37 @@ class Faculdade:
 
     def jogar_solo(self):
         print(f'Nível escolhido = {self.nivel}')
+        print('SE VOCÊ SOUBER A PALAVRA DIGITE # e TENTA A SORTE!')
 
         tempo_inicio = time.time()
         
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
+            if self.letra_digitada == '#':
+                palavra_digitada = input('Qual é a palavra? ')
+                if palavra_digitada == self.palavra_secreta:
+                    self.contagem += 1
+                    os.system('clear')
+                    print('Parabéns, você ganhou!')
+                    print(f'A palavra era "{self.palavra_secreta}"')
+                    print(f'{self.contagem} tentativas')
+                    print(f'Dicas usadas: {self.dicas}')
+                    if minutos == 0:
+                        print(f'Tempo gasto: {segundos:.2f} segundos')
+                    else:
+                        print(f'Tempo gasto: {minutos:.0f} minutos e {segundos:.2f} segundos')
+                    break
+                else:
+                    self.contagem += 1
+                    os.system('clear')
+                    print('ERROUUUUU')
+                    continue
 
             if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
+
             
             self.contagem += 1
 
@@ -120,6 +141,7 @@ class Faculdade:
 
         print(f'Vez do {self.player_1}')
         print(f'Nível escolhido = {self.nivel}')
+        print('SE VOCÊ SOUBER A PALAVRA DIGITE # e TENTA A SORTE!')
 
         tempo_inicio_1 = time.time()
         self.minutos_1 = 0
@@ -128,6 +150,23 @@ class Faculdade:
         while True:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
+            if self.letra_digitada == '#':
+                palavra_digitada = input('Qual é a palavra? ')
+                
+                if palavra_digitada == self.palavra_secreta:
+                    self.contagem += 1
+                    os.system('clear')
+                    tempo_final_1 = time.time()
+                    self.tempo_gasto_1 = tempo_final_1 - tempo_inicio_1
+                    self.minutos_1 = self.tempo_gasto_1 // 60
+                    self.segundos_1 = self.tempo_gasto_1 % 60
+                    print('Parabéns, você acertou!')
+                    break
+                else:
+                    self.contagem += 1
+                    os.system('clear')
+                    print('ERROUUUUU')
+                    continue
 
             if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
                 print('Digite apenas uma letra')
@@ -166,6 +205,7 @@ class Faculdade:
         print('-------------------------------------')
         print(f'Vez do {self.player_2}')
         print(f'Nível escolhido = {self.nivel}')
+        print('SE VOCÊ SOUBER A PALAVRA DIGITE # e TENTA A SORTE!')
 
         tempo_inicio_2 = time.time()
         self.minutos_2 = 0
@@ -175,8 +215,25 @@ class Faculdade:
         while True:
             self.letra_digitada_2 = input('Digite uma letra: ').lower()
             
+            if self.letra_digitada_2 == '#':
+                palavra_digitada_2 = input('Qual é a palavra? ')
+                
+                if palavra_digitada_2 == self.palavra_secreta_2:
+                    self.contagem2 += 1
+                    os.system('clear')
+                    tempo_final_2 = time.time()
+                    self.tempo_gasto_2 = tempo_final_2 - tempo_inicio_2
+                    self.minutos_2 = self.tempo_gasto_2 // 60
+                    self.segundos_2 = self.tempo_gasto_2 % 60
+                    print('Parabéns, você acertou!')
+                    break
+                else:
+                    self.contagem2 += 1
+                    os.system('clear')
+                    print('ERROUUUUU')
+                    continue
 
-            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
+            if len(self.letra_digitada_2) > 1 or len(self.letra_digitada_2) == 0 or self.letra_digitada_2.isdigit() or self.letra_digitada_2.isalnum() == False:
                 print('Digite apenas uma letra')
                 continue
             
