@@ -2,6 +2,7 @@ import random
 import os
 import time
 
+
 class Faculdade:
     def __init__(self, nivel):
         self.nivel = nivel
@@ -16,13 +17,13 @@ class Faculdade:
         self.dicas = 0
 
         if self.nivel == 1:
-            self.palavras_secretas += 'aula', 'aluno', 'professor', 'prova'
+            self.palavras_secretas += 'aula', 'aluno', 'professor', 'prova', 'caderno', 'quadro', 'nota'
         elif self.nivel == 2:
-            self.palavras_secretas += 'engenharia', 'fisica', 'calculo', 'matricula'
+            self.palavras_secretas += 'engenharia', 'fisica', 'calculo', 'matricula', 'quimica', 'notebook'
         elif self.nivel == 3:
-            self.palavras_secretas += 'laboratorio', 'auditorio', 'discente'
+            self.palavras_secretas += 'laboratorio', 'auditorio', 'lapiseira', 'compasso', 'carteira'
         elif self.nivel == 4:
-            self.palavras_secretas += 'scardua', 'obelisco', 'restaurante universitario'
+            self.palavras_secretas += 'discente', 'obelisco', 'restaurante universitario', 'orientacao a objetos'
         else:
             print('Não era pra chegar aqui, digite um nível válido')
         self.palavra_secreta = random.choice(self.palavras_secretas)
@@ -34,6 +35,7 @@ class Faculdade:
             )
 
     def jogar_solo(self):
+        print(f'TEMA: {temadojogo}')
         print(f'Nível escolhido = {self.nivel}')
         print('SE VOCÊ SOUBER A PALAVRA DIGITE # e TENTA A SORTE!')
 
@@ -43,7 +45,7 @@ class Faculdade:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
             if self.letra_digitada == '#':
-                palavra_digitada = input('Qual é a palavra? ')
+                palavra_digitada = input('Qual é a palavra? ').lower()
                 if palavra_digitada == self.palavra_secreta:
                     self.contagem += 1
                     os.system('clear')
@@ -151,7 +153,7 @@ class Faculdade:
             self.letra_digitada = input('Digite uma letra: ').lower()
             
             if self.letra_digitada == '#':
-                palavra_digitada = input('Qual é a palavra? ')
+                palavra_digitada = input('Qual é a palavra? ').lower()
                 
                 if palavra_digitada == self.palavra_secreta:
                     self.contagem += 1
@@ -216,7 +218,7 @@ class Faculdade:
             self.letra_digitada_2 = input('Digite uma letra: ').lower()
             
             if self.letra_digitada_2 == '#':
-                palavra_digitada_2 = input('Qual é a palavra? ')
+                palavra_digitada_2 = input('Qual é a palavra? ').lower()
                 
                 if palavra_digitada_2 == self.palavra_secreta_2:
                     self.contagem2 += 1
@@ -289,19 +291,7 @@ class Faculdade:
                 print('DEu EMPATE!')
         else:
             print('DEU EMPATE!')
-
-    def contratempo(self):
-
-        tempo_inicio = time.time()
-
-        while True:
-            self.letra_digitada = input('Digite uma letra: ').lower()
-
-            if len(self.letra_digitada) > 1 or len(self.letra_digitada) == 0 or self.letra_digitada.isdigit() or self.letra_digitada.isalnum() == False:
-                print('Digite apenas uma letra')
-                continue
             
-
 class Ingles(Faculdade):
     def __init__(self, nivel):
         super().__init__(nivel)
@@ -365,11 +355,11 @@ class Paises(Faculdade):
         if self.nivel == 1:
             self.palavras_secretas += 'brasil', 'peru', 'china', 'argentina', 'estados unidos', 'franca', 'alemanha', 'canada'
         elif self.nivel == 2:
-            self.palavras_secretas += 'china', 'japao', 'holanda', 'australia', 'grecia', 'turquia', 'egito', 'inglaterra'
+            self.palavras_secretas += 'china', 'japao', 'holanda', 'australia', 'grecia', 'turquia', 'egito', 'inglaterra', 'qatar'
         elif self.nivel == 3:
             self.palavras_secretas += 'singapura', 'irlanda do norte', 'argelia', 'tailandia', 'albania', 'marrocos', 'angola', 'nova zelandia', 'afeganistao'
         elif self.nivel == 4:
-            self.palavras_secretas += 'chipre', 'etiopia', 'burkina faso', 'azerbaijao'
+            self.palavras_secretas += 'chipre', 'etiopia', 'burkina faso', 'azerbaijao', 'sudao'
         else:
             print('digite um nível válido')
         self.palavra_secreta = random.choice(self.palavras_secretas)
@@ -446,6 +436,7 @@ nivel_jogo = selecionar_nivel()
 
 if tema_jogo == 1:
     jogo = Faculdade(nivel_jogo)
+    temadojogo = 'Faculdade'
     if modo_de_jogo == 1:
         jogo.jogar_solo()
     elif modo_de_jogo == 2:
@@ -454,6 +445,7 @@ if tema_jogo == 1:
         print('Deu ruim')
 elif tema_jogo == 2:
     jogo = Ingles(nivel_jogo)
+    temadojogo = 'Inglês'
     if modo_de_jogo == 1:
         jogo.jogar_solo()
     elif modo_de_jogo == 2:
@@ -462,6 +454,7 @@ elif tema_jogo == 2:
         print('Deu ruim')
 elif tema_jogo == 3:
     jogo = Paises(nivel_jogo)
+    temadojogo = 'Paises'
     if modo_de_jogo == 1:
         jogo.jogar_solo()
     elif modo_de_jogo == 2:
@@ -471,6 +464,3 @@ elif tema_jogo == 3:
 else:
     print("Não era pra chegar aqui")
     exit()
-
-# CONTRATEMPO JOGO
-# LIBERAR O JOGADOR A ESCREVER A PALAVRA SE ELE SOUBER
