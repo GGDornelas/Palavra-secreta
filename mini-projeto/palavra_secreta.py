@@ -1,7 +1,7 @@
 import random
 import os
 import time
-
+import json
 
 class Faculdade:
     def __init__(self, nivel):
@@ -35,6 +35,7 @@ class Faculdade:
             )
 
     def jogar_solo(self):
+        self.player = input('Digite o nome do jogador: ')
         print(f'TEMA: {temadojogo}')
         print(f'Nível escolhido = {self.nivel}')
         print('SE VOCÊ SOUBER A PALAVRA DIGITE # e TENTA A SORTE!')
@@ -136,7 +137,11 @@ class Faculdade:
                 else:
                     print(f'Tempo gasto: {minutos:.0f} minutos e {segundos:.2f} segundos')
                 break
+
+        desempenho_manager = Podio()
+        desempenho_manager.registrar_desempenho(jogador=self.player, tema=temadojogo, nivel=self.nivel, tentativas=self.contagem, tempo_gasto=f'{tempo_decorrido:.2f}')
     
+
     def jogar_multiplayer(self):
         self.player_1 = input('Digite o nome do jogador 1: ')
         self.player_2 = input('Digite o nome do jogador 2: ')   
@@ -374,6 +379,65 @@ class Paises(Faculdade):
 
     def jogar_multiplayer(self):
         super().jogar_multiplayer()
+
+class Podio:
+    def __init__(self, arquivo='melhores_desempenhos.json'):
+        self.arquivo = arquivo
+        self.desempenhos = self.carregar_desempenhos()
+
+    def carregar_desempenhos(self):
+        if os.path.exists(self.arquivo):
+            with open(self.arquivo, 'r') as f:
+                return json.load(f)
+        return []
+
+    def salvar_desempenhos(self):
+        with open(self.arquivo, 'w') as f:
+            json.dump(self.desempenhos, f, indent=4)
+
+    def registrar_desempenho(self, jogador, tema, nivel, tentativas, tempo_gasto):
+        novo_desempenho = {
+            "jogador": jogador,
+            "tema": tema,
+            "nivel": nivel,
+            "tentativas": tentativas,
+            "tempo_gasto": tempo_gasto
+        }
+           
+        self.desempenhos.append(novo_desempenho)
+        
+        self.salvar_desempenhos()
+
+    def exibir_desempenhos(self):
+        if not self.desempenhos:
+            print("Nenhum desempenho registrado ainda.")
+        else:
+            for desempenho in self.desempenhos:
+                print(f"Jogador: {desempenho['jogador']}, Tema: {desempenho['tema']}, "
+                      f"Nível: {desempenho['nivel']}, Tentativas: {desempenho['tentativas']}, "
+                      f"Tempo Gasto: {desempenho['tempo_gasto']} segundos") 
+
+
+    def podio_arrumado(self):
+        melhores_por_nivel = {}
+
+        for desempenho in self.desempenhos:
+            nivel = desempenho['nivel']
+            if nivel not in melhores_por_nivel:
+                melhores_por_nivel[nivel] = desempenho
+            else:
+                melhor = melhores_por_nivel[nivel]
+                if (desempenho['tentativas'] < melhor['tentativas'] or 
+                    (desempenho['tentativas'] == melhor['tentativas'] and desempenho['tempo_gasto'] < melhor['tempo_gasto'])):
+                    melhores_por_nivel[nivel] = desempenho
+
+        print("Pódio de Melhores Jogadores:")
+        for nivel, desempenho in sorted(melhores_por_nivel.items()):
+            print(f"Nível {nivel}:")
+            print(f"  Jogador: {desempenho['jogador']}")
+            print(f"  Tema: {desempenho['tema']}")
+            print(f"  Tentativas: {desempenho['tentativas']}")
+            print(f"  Tempo Gasto: {desempenho['tempo_gasto']} segundos")
         
 def selecionar_tema():
     print(
@@ -464,3 +528,26 @@ elif tema_jogo == 3:
 else:
     print("Não era pra chegar aqui")
     exit()
+
+
+def printar_podio():
+    ver_podio = Podio()
+    while True:
+        deseja = input('Deseja ver o podio? s/n ----- ').lower()
+        if deseja == 's':
+            os.system('clear')
+            ver_podio.podio_arrumado()
+            break
+        elif deseja == 'n':
+            os.system('clear')
+            print('Jogo encerrado!')
+            break
+        else:
+            os.system('clear')
+            print('Digite algo válido, "s" ou "n"')
+            continue
+
+if modo_de_jogo == 1:
+    aparecer_podio = printar_podio()
+else:
+    None
